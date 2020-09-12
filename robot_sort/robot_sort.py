@@ -96,31 +96,33 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        #if bot is in an empty arry or and array of 1
+        #turn on robot
+        self.set_light_on()
+        #if bot is in an empty arry or an array of 1 turn off and exit
         if not self.can_move_right():
+            self.set_light_off()
             return 
-        #pick up the first thing
-        self.swap_item()
         #exit strategy
-        while True:
+        while self.light_is_on():
+        #pick up the first thing
+            self.swap_item()
         #as long as he can move right do the thing
             while self.can_move_right():
                 self.move_right()
-        #compare what he's holding with what's in front of him, if it's bigger or the same swap
-                if self.compare_item() == 1 or self.compare_item == 0:
+        #compare what he's holding with what's in front of him, if it's bigger swap
+                if self.compare_item() > 0:
                         self.swap_item()
         #as long as comparing the item isn't returning "none" move left
-            while self.compare_item() != None:
+            while self.compare_item() is not None:
                 self.move_left()
-        #when that isn't true anymore swap 
+        #when that isn't true anymore drop the last thing
             self.swap_item()
-        #if bot is at the end of the list restart
-            if not self.can_move_right():
-                return
-        #triggering the false response
-            self.move_right()
-        #drop the last thing
-            self.swap_item()
+        #make sure the bot is at the end if not move to the next index
+            if self.can_move_right():
+                self.move_right()
+        #else if bot is at the end of the list turn off
+            else:
+                self.set_light_off()
         
 
         
