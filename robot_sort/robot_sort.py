@@ -96,10 +96,34 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        #if bot is at the end of the list exit
+        if not self.can_move_right():
+            return 
+        #pick up the first thing
+        self.swap_item()
+        #exit strategy
+        while True:
+        #as long as he can move right...
+        #do the thing
+            while self.can_move_right():
+                self.move_right()
+        #compare what he's holding with what's in front of him, if it's bigger swap
+                if self.compare_item() == 1:
+                        self.swap_item()
+        #as long as comparing the item isn't returning "none" move left
+            while self.compare_item() != None:
+                self.move_left()
+        #when that isn't true anymore swap 
+            self.swap_item()
+        #if bot is at the end of the list restart
+            if not self.can_move_right():
+                return
+        #triggering the false response
+            self.move_right()
+            self.swap_item()
+        
 
-
+        
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
