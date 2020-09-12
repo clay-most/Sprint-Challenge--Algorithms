@@ -96,19 +96,18 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        #if bot is at the end of the list exit
+        #if bot is in an empty arry or and array of 1
         if not self.can_move_right():
             return 
         #pick up the first thing
         self.swap_item()
         #exit strategy
         while True:
-        #as long as he can move right...
-        #do the thing
+        #as long as he can move right do the thing
             while self.can_move_right():
                 self.move_right()
-        #compare what he's holding with what's in front of him, if it's bigger swap
-                if self.compare_item() == 1:
+        #compare what he's holding with what's in front of him, if it's bigger or the same swap
+                if self.compare_item() == 1 or self.compare_item == 0:
                         self.swap_item()
         #as long as comparing the item isn't returning "none" move left
             while self.compare_item() != None:
@@ -120,6 +119,7 @@ class SortingRobot:
                 return
         #triggering the false response
             self.move_right()
+        #drop the last thing
             self.swap_item()
         
 
